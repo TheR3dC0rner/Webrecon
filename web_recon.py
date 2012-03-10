@@ -117,7 +117,7 @@ def dirby_hunt(nmap_file,wordlist,report_dir,dirb_base,dirb_check):
 			
 			while count < len(thumbs.split(",")):
 				port = thumbs.split(",")[count]
-				dirb_process = "dirb/dirb http://" + hostname + ":"+ port + " "+ wordlist+ " -o"+report_dir+hostname+"_"+port+".txt" + dirb_base
+				dirb_process = dirb_location + " http://" + hostname + ":"+ port + " "+ wordlist+ " -o"+report_dir+hostname+"_"+port+".txt" + dirb_base
 				print dirb_process		
 				pool.add_task(subprocess.call,(dirb_process.split(" "),))
 				count = count + 1 
@@ -132,7 +132,7 @@ def dirby_hunt(nmap_file,wordlist,report_dir,dirb_base,dirb_check):
 			count = 1
 			while count < len(thumbs.split(",")):
 				port = thumbs.split(",")[count]
-				dirb_process = "dirb/dirb https://" + hostname + ":"+port+" "+wordlist+" -o "+report_dir+hostname+"_"+port+".txt"
+				dirb_process = dirb_location + " https://" + hostname + ":"+port+" "+wordlist+" -o "+report_dir+hostname+"_"+port+".txt"
 				print dirb_process		
 				#subprocess.call(dirb_process.split(" "))
 				pool.add_task(subprocess.call,(dirb_process.split(" "),))
@@ -148,7 +148,7 @@ def dirby_hunt(nmap_file,wordlist,report_dir,dirb_base,dirb_check):
 			count = 1
 			while count < len(thumbs.split(",")):
 				port = thumbs.split(",")[count]
-				dirb_process = "dirb/dirb https://" + hostname + ":"+port+" "+wordlist+" -o "+report_dir+hostname+"_"+port+".txt"
+				dirb_process = dirb_location + " https://" + hostname + ":"+port+" "+wordlist+" -o "+report_dir+hostname+"_"+port+".txt"
 				print dirb_process		
 				#subprocess.call(dirb_process.split(" "))
 				pool.add_task(subprocess.call,(dirb_process.split(" "),))
@@ -308,12 +308,15 @@ def main ():
 			thumb_check = line.split("\"")[1]
 		if not(line.find("dirb_check") == -1):
 			dirb_check = line.split("\"")[1]
-		if not(line.find("max_threads") == -1):
+		if not(line.find("max_ports") == -1):
 			global max_threads
 			max_threads = int(line.split("\"")[1])
-		if not(line.find("max_ports") == -1):
+		if not(line.find("max_hosts") == -1):
 			global max_hosts
 			max_hosts = int(line.split("\"")[1])
+		if not(line.find("dirb_location") == -1):
+			global dirb_location
+			dirb_location = line.split("\"")[1]
 #	print dirb_check
 #	print thumb_check
 	#aaaaa

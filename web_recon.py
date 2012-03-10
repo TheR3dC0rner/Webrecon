@@ -357,5 +357,8 @@ def main ():
 	return 0
 	
 
-main()
+try :
+	main()
+except:
+	print "Please type -h for help"
 

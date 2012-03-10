@@ -1,5 +1,76 @@
-More to add to this but for now, to use do an 
+webrecon requires 2.7.  This instructions relate to BT 5.  
+
+This is my attempt to automate some of my recon work of nmap, thumbnailing and direcory busting.
+
+
+To install type:
 apt-get install dirb
 apt-get install gnome-web-photo
 
-if using backtrack
+To use:
+
+ ./webrecon -h this will give this basic help
+  -h, --help        show this help message and exit
+  -t SCAN_TYPE      Type of scan to perform: internal,external,quick,file
+  -n NETWORK_RANGE  Network range to scan or file name in network scan
+  -p REPORT_DIR     Project name to be stored in report dir
+
+
+-h is for the basic help options
+
+Scan Types:
+internal:  scan the subnet for 80,443..presume all the hosts found with open and closed ports are actual hosts on the network. Contine with the full service scan on these hosts.
+external:  presume there is a firewall and when the scanner exapands to the full port scan then scan every host on the subnet
+quick:  just check port 80 and 443
+
+Network Range:
+this should take standard nmap ranges.  This include using a -iL if you have a file list to use
+Also use -n for the file path if using a file type scan
+
+-p this is report directory where all the data is being stored.  This will eventually have a report.html file but i have not done this yet
+
+There is also a config file it comes with these settings:
+
+nmap_base = "nmap -PN -n -T5 -vvvvv --max-retries 1 "
+report_dir = "reports/"
+initial_nmap = "-p 80,443"
+full_nmap  = "-p1-65535"	
+wordlist = "/pentest/enumeration/web/dirb/wordlists/common.txt"
+dirb_base= " "
+thumb_check = "yes"
+dirb_check = "yes"
+max_ports ="5"
+max_hosts = "5"
+dirb_location = "/pentest/enumeration/web/dirb/dirb"
+
+
+Nmap Base:
+This setting is what will be used for every nmap scan.  My default is aggressive because i was in test mode
+
+Initial Nmap:
+THis setting is what the first scan does.  This gets added to the nmap_base You can define it anyway you want.  I currently only look at 80-443
+
+Full Nmap:
+This also is what it will be added to the nmap_base.  This is the second stage of the scan.  You can modify and what you want.
+
+Word list:
+The location of the dictionary to be used
+
+dirb_base:
+
+You can add addition options to dirb
+
+
+Thumb Check and Dirb Check:
+
+You can optionally turn of thumbnailing and directory busting
+
+Max Ports:
+How many ports per host to attept to at once
+
+Max Hosts:
+Total number of hosts to try at once
+
+dirb location:
+
+Location of the dirb binary

@@ -311,11 +311,11 @@ def main ():
 		if not(line.find("max_threads") == -1):
 			global max_threads
 			max_threads = int(line.split("\"")[1])
-		if not(line.find("max_threads") == -1):
+		if not(line.find("max_ports") == -1):
 			global max_hosts
 			max_hosts = int(line.split("\"")[1])
-	print dirb_check
-	print thumb_check
+#	print dirb_check
+#	print thumb_check
 	#aaaaa
 
 			

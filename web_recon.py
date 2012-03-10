@@ -322,11 +322,21 @@ def main ():
 	#aaaaa
 
 			
-	parser = argparse.ArgumentParser()
+	parser = argparse.ArgumentParser(prog='webrecon -h',
+					  description='''Basic webrecon program.  Copyright (C) 2012 <Offwidth>''',
+					  epilog='''    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.''')
 	parser.add_argument ('-t',action='store',dest='scan_type',help='Type of scan to perform: internal,external,quick,file')
 	parser.add_argument('-n',action='store',dest='network_range',help='Network range to scan or file name in network scan')
 	parser.add_argument('-p',action='store',dest='report_dir',help='Project name to be stored in report dir')
-		
+#	parser.add_argument('-c', help="WebRecon Copyright (C) 2012 Offwidth")	
 	command_line = parser.parse_args()
 	network_range = command_line.network_range
 	report_dir = report_dir + command_line.report_dir + "/"

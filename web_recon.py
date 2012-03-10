@@ -359,6 +359,6 @@ def main ():
 
 try :
 	main()
-except:
+except TypeError:
 	print "Please type -h for help"
 
